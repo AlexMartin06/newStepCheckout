@@ -34,7 +34,7 @@ class Config extends Action
     {
         // TODO: Implement execute() method.
         echo $this->helperData->getGeneralConfig('enable');
-        echo $this->helperData->getGeneralConfig('display_text');
+        echo $this->helperData->getGeneralConfig('step_label');
         echo $this->helperData->getGeneralConfig('categories');
         exit();
     }

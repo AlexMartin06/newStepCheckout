@@ -7,7 +7,8 @@ define(
         'Magento_Customer/js/model/customer',
         'mage/url',
         'Magento_Checkout/js/model/quote',
-        'Magento_Catalog/js/price-utils'
+        'Magento_Catalog/js/price-utils',
+        'catalogAddToCart'
     ],
     function (
         ko,
@@ -17,7 +18,9 @@ define(
         customer,
         url,
         quote,
-        priceUtils
+        priceUtils,
+        getCartItems,
+        $
     ) {
         'use strict';
 
@@ -28,7 +31,7 @@ define(
 
             isVisible: ko.observable(true),
             stepCode: 'checkoutProducts',
-            stepTitle: window.checkoutConfig.customStepName,
+            stepTitle: window.checkoutConfig.newStep.customStepName,
 
             /**
              *
@@ -55,8 +58,13 @@ define(
             getProducts: function () {
                 Object.values(window.checkoutConfig.newStep.products).map((product, index) => {
                     product.productPostData = window.checkoutConfig.newStep.productsPostData[index];
+                    product.productUrl = window.checkoutConfig.newStep.productUrls[index];
                 });
                 return Object.values(window.checkoutConfig.newStep.products);
+            },
+
+            getFormKey: function () {
+                return window.checkoutConfig.formKey;
             },
 
             getBaseUrl: function () {

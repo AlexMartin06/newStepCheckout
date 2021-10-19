@@ -47,6 +47,7 @@ class AdditionalConfigVars implements ConfigProviderInterface
     public function getConfig()
     {
         $postProductArray = [];
+        $productUrls = [];
         $stepNameConfig = $this->scopeConfig->getValue('customstep/general/step_label', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $selectedCategories = $this->scopeConfig->getValue('customstep/general/categories', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $productCollection = $this->getProductCollectionByCategories($selectedCategories);
@@ -54,11 +55,13 @@ class AdditionalConfigVars implements ConfigProviderInterface
          foreach ($productCollection as $product)
          {
              array_push($postProductArray, $this->listProduct->getAddToCartPostParams($product));
+             array_push($productUrls, $product->getProductUrl());
          }
 
         $additionalVariables['newStep']['products'] = $productCollection->toArray();
         $additionalVariables['newStep']['customStepName'] = $stepNameConfig;
         $additionalVariables['newStep']['productsPostData'] = $postProductArray;
+        $additionalVariables['newStep']['productUrls'] = $productUrls;
 
         return $additionalVariables;
     }
@@ -72,7 +75,7 @@ class AdditionalConfigVars implements ConfigProviderInterface
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
         $collection->addCategoriesFilter(['in' => $ids]);
-        $collection->setPageSize(6);
+        $collection->setPageSize(40);
         return $collection;
     }
 }

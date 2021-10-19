@@ -2,28 +2,30 @@
 
 namespace Elogic\Checkout\Model\Config\Source;
 
+use Magento\Catalog\Model\CategoryFactory;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Option\ArrayInterface;
 
 class Category implements ArrayInterface
 {
     /**
-     * @var \Magento\Catalog\Model\CategoryFactory
+     * @var CategoryFactory
      */
     protected $_categoryFactory;
 
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_categoryCollectionFactory;
 
     /**
      * Category constructor.
-     * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
-     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param CategoryFactory $categoryFactory
+     * @param CollectionFactory $categoryCollectionFactory
      */
     public function __construct(
-        \Magento\Catalog\Model\CategoryFactory $categoryFactory,
-        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+        CategoryFactory $categoryFactory,
+        CollectionFactory $categoryCollectionFactory
     )
     {
         $this->_categoryFactory = $categoryFactory;
@@ -76,11 +78,13 @@ class Category implements ArrayInterface
     private function _toArray()
     {
         $categories = $this->getCategoryCollection(true, false, false, false);
-
         $catagoryList = array();
+
         foreach ($categories as $category)
         {
-            $catagoryList[$category->getEntityId()] = __($this->_getParentName($category->getPath()) . $category->getName());
+            if($category->getProductCount() > 0) {
+                $catagoryList[$category->getEntityId()] = __($this->_getParentName($category->getPath()) . $category->getName());
+            }
         }
 
         return $catagoryList;

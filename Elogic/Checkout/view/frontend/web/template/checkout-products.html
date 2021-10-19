@@ -14,32 +14,38 @@
         </form>
     </div>
     <div class="custom-step-wrapper product-container">
-        <div class="product-item" repeat="foreach: getProducts(), item: '$product'">
-            <div class="checkout-product-image-wrapper">
-                <div class="product-image">
-                    <img data-bind="attr:{src: getBaseUrl()+$product().image}">
-                </div>
-            </div>
 
-            <div class="product-item-details">
-                <div class="product-price-wrapper">
-                    <div class="product-price">
-                        <span text="getFormattedPrice($product().price)" />
+            <div class="product-item" repeat="foreach: getProducts(), item: '$product'">
+                <a data-bind="attr: { href: $product().productUrl }">
+                    <div class="checkout-product-image-wrapper">
+                        <div class="product-image">
+                            <img data-bind="attr:{src: getBaseUrl()+$product().image}">
+                        </div>
                     </div>
-                </div>
-                <div class="product-name">
-                    <span text="$product().name" />
-                </div>
-                <form  data-bind="attr: {
-                    'data-product-sku' : $product().sku,
-                    action: $product().productPostData.action
-                }" data-role="tocart-form" method="post">
-                        <button type="submit" title="Add to Cart" class="action tocart primary">
-                            <span><!-- ko i18n: 'Add to Cart'--><!-- /ko --></span>
-                        </button>
-                </form>
+
+                    <div class="product-item-details">
+                        <div class="product-price-wrapper">
+                            <div class="product-price">
+                                <span text="getFormattedPrice($product().price)" />
+                            </div>
+                        </div>
+                        <div class="product-name">
+                            <span text="$product().name" />
+                        </div>
+                        <form  data-bind="attr: {
+                            'data-product-sku' : $product().sku,
+                            action: $product().productPostData.action
+                        },
+                            mageInit: {'catalogAddToCart': {}}" data-role="tocart-form" method="post">
+                            <input type="hidden" name="product" value="$product().productPostData.data.product">
+                            <input data-bind='attr: {value: getFormKey()}' type="hidden" name="form_key"/>
+                                <button type="submit" title="Add to Cart" class="action tocart primary">
+                                    <span><!-- ko i18n: 'Add to Cart'--><!-- /ko --></span>
+                                </button>
+                        </form>
+                    </div>
+                </a>
             </div>
-        </div>
     </div>
 </li>
 
