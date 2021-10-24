@@ -23,6 +23,10 @@
                     <label>Category</label>
                     <source_model>Elogic\Checkout\Model\Config\Source\Category</source_model>
                 </field>
+                <field id="number_of_products" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <validate>integer required-entry</validate>
+                    <label>Number of Products to Display</label>
+                </field>
             </group>
         </section>
     </system>

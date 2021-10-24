@@ -7,7 +7,7 @@ use Magento\Store\Model\ScopeInterface;
 
 class Data extends AbstractHelper
 {
-    const XML_PATH_HELLOWORLD = 'customstep/';
+    const XML_PATH_CUSTOMSTEP = 'customstep/';
 
     /**
      * @param $field
@@ -28,7 +28,7 @@ class Data extends AbstractHelper
      */
     public function getGeneralConfig($code, $storeId = null)
     {
-        return $this->getConfigValue(self::XML_PATH_HELLOWORLD .'general/'. $code, $storeId);
+        return $this->getConfigValue(self::XML_PATH_CUSTOMSTEP .'general/'. $code, $storeId);
     }
 
 }

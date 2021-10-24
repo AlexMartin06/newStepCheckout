@@ -5,6 +5,7 @@
             <general>
                 <enable>1</enable>
                 <step_label>Custom Checkout Step</step_label>
+                <number_of_products>6</number_of_products>
             </general>
         </customstep>
     </default>

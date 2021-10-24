@@ -8,7 +8,9 @@ define(
         'mage/url',
         'Magento_Checkout/js/model/quote',
         'Magento_Catalog/js/price-utils',
-        'catalogAddToCart'
+        'Magento_Checkout/js/model/cart/totals-processor/default',
+        'Magento_Checkout/js/view/minicart'
+
     ],
     function (
         ko,
@@ -19,8 +21,7 @@ define(
         url,
         quote,
         priceUtils,
-        getCartItems,
-        $
+        totalsDefaultProvider
     ) {
         'use strict';
 
@@ -77,7 +78,6 @@ define(
              * @return {*|String}
              */
             getFormattedPrice: function (price) {
-                //todo add format data
                 return priceUtils.formatPrice(price, quote.getPriceFormat());
             },
 
@@ -88,7 +88,12 @@ define(
              */
             navigateToNextStep: function () {
                 stepNavigator.next();
+            },
+
+            updateSummary: function() {
+                totalsDefaultProvider.estimateTotals(quote.shippingAddress());
             }
+
         });
     }
 );

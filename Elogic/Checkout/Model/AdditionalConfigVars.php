@@ -48,9 +48,10 @@ class AdditionalConfigVars implements ConfigProviderInterface
     {
         $postProductArray = [];
         $productUrls = [];
+        $numberOfProducts = $this->scopeConfig->getValue('customstep/general/number_of_products', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $stepNameConfig = $this->scopeConfig->getValue('customstep/general/step_label', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $selectedCategories = $this->scopeConfig->getValue('customstep/general/categories', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $productCollection = $this->getProductCollectionByCategories($selectedCategories);
+        $productCollection = $this->getProductCollectionByCategories($selectedCategories, $numberOfProducts);
 
          foreach ($productCollection as $product)
          {
@@ -70,12 +71,12 @@ class AdditionalConfigVars implements ConfigProviderInterface
      * @param $ids
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
-    public function getProductCollectionByCategories($ids)
+    public function getProductCollectionByCategories($ids, $numberOfProducts)
     {
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
         $collection->addCategoriesFilter(['in' => $ids]);
-        $collection->setPageSize(40);
+        $collection->setPageSize($numberOfProducts);
         return $collection;
     }
 }

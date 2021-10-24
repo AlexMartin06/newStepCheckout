@@ -14,7 +14,6 @@
         </form>
     </div>
     <div class="custom-step-wrapper product-container">
-
             <div class="product-item" repeat="foreach: getProducts(), item: '$product'">
                 <a data-bind="attr: { href: $product().productUrl }">
                     <div class="checkout-product-image-wrapper">
@@ -39,7 +38,7 @@
                             mageInit: {'catalogAddToCart': {}}" data-role="tocart-form" method="post">
                             <input type="hidden" name="product" value="$product().productPostData.data.product">
                             <input data-bind='attr: {value: getFormKey()}' type="hidden" name="form_key"/>
-                                <button type="submit" title="Add to Cart" class="action tocart primary">
+                                <button data-bind='event: {mouseup: updateSummary}' type="submit" title="Add to Cart" class="action tocart primary">
                                     <span><!-- ko i18n: 'Add to Cart'--><!-- /ko --></span>
                                 </button>
                         </form>

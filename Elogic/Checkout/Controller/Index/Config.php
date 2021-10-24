@@ -32,10 +32,10 @@ class Config extends Action
      */
     public function execute()
     {
-        // TODO: Implement execute() method.
         echo $this->helperData->getGeneralConfig('enable');
         echo $this->helperData->getGeneralConfig('step_label');
         echo $this->helperData->getGeneralConfig('categories');
+        echo $this->helperData->getGeneralConfig('number_of_products');
         exit();
     }
 }
