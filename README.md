@@ -10,7 +10,8 @@ php bin/magento setup:upgrade
 1) You can set your custom checkout step label.
 2) You can choose categories with products, which will be rendered on checkout custom step.
 
-![image](https://user-images.githubusercontent.com/80339554/137958351-6845b5dd-825e-47d3-8183-9647ea011fe1.png)
+![image](https://user-images.githubusercontent.com/80339554/138617184-53dee866-13e0-478e-bfab-94a738954891.png)
+
 
 # After adding your custom configuration, you can see:
 
